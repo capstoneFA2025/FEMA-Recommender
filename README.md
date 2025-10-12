@@ -6,9 +6,11 @@ FEMA Incident Management Assistance Teams (IMAT) are the first FEMA personnel to
 
 ## If applicable, please describe the dataset(s) you plan to use. You'll want to share the source, access method, and what features of the data you plan to explore.
 FEMA mission assignments dataset: https://www.fema.gov/openfema-data-page/mission-assignments-v2
+
 This dataset is a csv file accessed via the OpenFEMA API.  It consists of approved mission assignments from October 2012- late 2024.  These are real-world mission assignments that are recorded by type of assistance, Emergency Support Function (ESF), responsible agency, region, state, and disaster number.  We are most interested in the assistance requested, as that is the starting point for all mission assignments.
 
 FEMA disaster declarations summary: https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2
+
 This dataset is a csv file that contains information about past disaster declarations, and is updated weekly by the agency.  It records the disaster number, impacted counties, state, region, and disaster type.  In addition to the disaster type for the declaration, it includes additional disasters occurring in the same area.  For instance, if a wildfire was followed by heavy rain, then flooding and landslides may be additional disasters in the declaration.  All of these types of disasters are important in understanding the mission assignments requested.
 
 ## Does your dataset have any usage restrictions? Please check for a license associated with the dataset. 
