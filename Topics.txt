@@ -1,0 +1,126 @@
+0 - COVID activations (various agencies)
+1 - Generic activation for any agency
+2 - USACE activation
+3 - Activate USACE retired annuitants or other personnel (various program support, mostly recovery)
+4 - Activate HHS (various capabilities)
+5 - COVID support (various agencies)
+6 - Provide temporary, deployable medical staff
+7 - Provide medical personnel, various agencies
+8 - DOD provided ISB
+9 - Activate Surge Capacity Force, various agencies, no specified capabilities
+10 - Activate incident command (mainly USFS)
+11 - VHA medical support (facilities or personnel)
+12 - USACE debris removal
+13 - GSA leasing support
+14 - Activate GSA to RRCC etc.
+15 - Activate ESFs (various) for Region II (can discard this topic)
+16 - USACE temporary emergency power generation
+17 - NOAA aircraft, survey and remote sensing
+18 - Water and wastewater assessment (various agencies)
+19 - EPA oil and HAZMAT
+20 - DOD command and control of DOD assets (also various other capabilities)
+21 - DOD personnel for emergency protective measures
+22 - USAF CAP imagery collection
+23 - Activate various Agencies to NRCC
+24 - Activate various agencies to RRCC
+25 - Activate agencies to Federal Search and Rescue Coordination Group
+26 - Activate CNCS
+27 - Medical personnel for COVID response (various agencies)
+28 - Flood water height measurement
+29 - DOD transportation support (air and ground)
+30 - Activate USFS
+31 - FPS physical security
+32 - MA re-issue or replace (can discard this topic)
+33 - HHS support (various capabilities)
+34 - USACE activation
+35 - Activate various agencies to NRCC (can discard)
+36 - Activate USACE SMEs
+37 - Activate USDA
+38 - Activate DOJ
+39 - Activation for ARPA (can discard)
+40 - USCG rescue (other capabilities mentioned)
+41 - Activate USDA (various capabilities mentioned)
+42 - Activate CISA
+43 - MA continuation ARPA (discard)
+44 - USACE infrastructure assessment
+45 - Staff augmentation (various agencies)
+46 - DLA fuel distribution
+47 - Activate HHS
+48 - Activate TVA
+49 - Surge Capacity Force activation
+50 - Activate EPA
+51 - Activate various agencies for response
+52 - Debris technical assistance
+53 - CBP rotary and fixed wing air support (various missions)
+54 - Provide security officers
+55 - Staff assistance (mostly BVI for PA)
+56 - Staff augmentation (various agencies)
+57 - Activations (various, can be combined or discarded)
+58 - NOAA activation
+59 - Activations (various, can be combined or discarded)
+60 - External affairs support (various agencies)
+61 - Re-issued MAs (can be discarded)
+62 - Rotary wing support (transportation and SAR)
+63 - MA continuation or reissue (discard)
+64 - DOD transportation (can possibly be combined with topic 29)
+65 - Provide contract security officers (similar to topic 54
+66 - Noise (possibly remove 'BOC 1234' from MA AR)
+67 - USACE temporary roofing
+68 - Emergency power generation (similar to topic 16)
+69 - Request Federal Law Enforcement for security
+70 - Design/build/upgrade medical facilities USACE (COVID specific)
+71 - FCC spectrum management coordination
+72 - Activations for specific storms (discard)
+73 - Activate USFS
+74 - DLA procure and deliver medical PPE (COVID specific)
+75 - DOD emergency protective measures personnel (COVID specific)
+76 - Re-issue MA (discard)
+77 - Activate HUD
+78 - Activate GSA for ESF-7
+79 - Activate various agencies to support Region III (can drop)
+80 - Activate DOT
+81 - Activate USCG liaison
+82 - Federal Medical Station activation
+83 - Various activations for Region 6
+84 - USDOT toll free routing assistance hotline
+85 - DCO/DCE activation
+86 - DCO/DCE activation (redundant with 85)
+87 - ESF-10 oil and hazardous material assessment and response
+88 - Activate GSA (similar to 78)
+89 - DOD emergency protective measures (mostly COVID, some other capabilities, similar to topic 75)
+90 - EPA ESF-10 activation
+91 - Activate CISA (mostly noise)
+92 - GSA field office search team
+93 - ICATT ARPA (can discard)
+94 - Recovery support function (not pertinent)
+95 - Activate DOI
+96 - Ventilator request (mostly ARPA and COVID)
+97 - Activate DOE
+98 - Hurricane Fiona activations (can discard)
+99 - Activate HUD
+100 - Activate GSA for ESF-7 (similar to topic 78)
+101 - SCF personnel
+102 - Fund obligation for DR4750 (can discard)
+103 - Activations mostly DOD
+104 - Pharmacy support
+105 - DOJ force protection
+106 - DLA meal and water support
+107 - USACE specialized expertise for debris oversight
+108 - Activate GSA
+109 - USCG oil and hazardous material (other capabilities)
+110 - SCF for vaccine center
+111 - HHS provide respirators
+112 - Activate GSA
+113 - DOD personnel emergency protective measures (COVID)
+114 - Re-issue (discard)
+115 - DOD Title 32 personnel
+116 - Nitrile gloves request
+117 - GEOINT support
+118 - Activate GSA/ESF-7
+119 - MA funding with ARPA (discard)
+120 - Vaccination center support
+121 - GSA site search
+122 - Activate USGS, USACE provide local government liaison
+123 - Activate DLA liaison
+124 - Activate CBP AMO personnel
+125 - DLA provide leased generators, fuel tanks, and electrical transformers
