@@ -48,13 +48,8 @@ def create_set(
     Returns X and y
     """
     df_predict = df.copy()
-    # This groupby process will combine resulting target values into a list
-    # This helps the model understand the connections between features and target values
     
     for col in feature_columns:
-        # Use a lambda to check if the value is iterable (like a list/array) and join it.
-        # This handles lists of strings, lists of numbers, or NumPy arrays.
-        # .apply(str) handles cases where the column might contain a mix of lists and non-lists.
         df_predict[col] = df_predict[col].apply(
             lambda x: ','.join(map(str, x)) if isinstance(x, (list, np.ndarray)) else x
         )
@@ -87,13 +82,8 @@ def create_set_AR(
     Returns X and y
     """
     df_predict = df.copy()
-    # This groupby process will combine resulting target values into a list
-    # This helps the model understand the connections between features and target values
     
     for col in feature_columns:
-        # Use a lambda to check if the value is iterable (like a list/array) and join it.
-        # This handles lists of strings, lists of numbers, or NumPy arrays.
-        # .apply(str) handles cases where the column might contain a mix of lists and non-lists.
         df_predict[col] = df_predict[col].apply(
             lambda x: ','.join(map(str, x)) if isinstance(x, (list, np.ndarray)) else x
         )
@@ -161,7 +151,6 @@ def transform_x_y_train(
     Returns X_transformer, y_transformer, transformer_X, and transformer_y
     """
     # Process X
-
     transformers = [
         ('OneHot', OneHotEncoder(handle_unknown='ignore', sparse_output=False), feature_columns)
     ]
@@ -305,22 +294,18 @@ def display_error_heatmap(
     if not isinstance(y_pred, np.ndarray):
         y_pred = y_pred.toarray()
     
-    # Calculate the four states for every cell (sample x label)
     is_TP = (y_true == 1) & (y_pred == 1)
     is_TN = (y_true == 0) & (y_pred == 0)
     is_FP = (y_true == 0) & (y_pred == 1)
     is_FN = (y_true == 1) & (y_pred == 0)
 
-    # Create an empty matrix to hold the final state codes
     prediction_states = np.empty(y_true.shape, dtype=object)
 
-    # Assign a categorical string based on the state.
     prediction_states[is_TP] = 'True Positive (TP)'
     prediction_states[is_TN] = 'True Negative (TN)'
     prediction_states[is_FP] = 'False Positive (FP)'
     prediction_states[is_FN] = 'False Negative (FN)'
 
-    # Convert the 2D matrix into a long-format Pandas DataFrame
     df_vis = pd.DataFrame(prediction_states, columns=y_true.columns)
     df_vis['Sample'] = [f'Sample_{i}' for i in range(len(y_true))]
     df_vis_long = df_vis.melt(
@@ -328,7 +313,7 @@ def display_error_heatmap(
         var_name='Label',
         value_name='Prediction_State',
         )
-    # Define the order and mapping to numerical IDs (required for imshow)
+
     order = ['True Negative (TN)', 'True Positive (TP)', 'False Negative (FN)', 'False Positive (FP)']
     color_map = {
         'True Positive (TP)': 'green',
@@ -337,35 +322,26 @@ def display_error_heatmap(
         'False Positive (FP)': 'red'
     }
 
-    # 1. Create a mapping dictionary from string state to integer ID
     state_to_int = {state: i for i, state in enumerate(order)}
     int_to_state = {i: state for i, state in enumerate(order)}
     color_scale = [color_map[state] for state in order]
 
-    # 2. Convert the categorical prediction_states array into a numerical ID matrix
     prediction_ids = np.vectorize(state_to_int.get)(prediction_states)
 
-    # 3. Use pandas to organize the final numerical matrix
     df_matrix = pd.DataFrame(
         prediction_ids,
         index=[f'Sample_{i}' for i in range(len(y_true))],
         columns=y_true.columns
     )
 
-    # 4. Visualization with px.imshow
-
     fig = px.imshow(
-        df_matrix.values, # Pass the numerical matrix values
+        df_matrix.values,
         x=df_matrix.columns,
         y=df_matrix.index,
-        color_continuous_scale=color_scale, # Use the custom colors
+        color_continuous_scale=color_scale,
         title="Prediction Error Matrix (Sample vs. Label)",
     )
 
-    # 5. Fix the Color Bar Ticks and Labels (to show the categorical state names)
-    # imshow only accepts numerical input, so we must manually override the color bar
-
-    # Calculate the center position for the ticks
     tick_values = np.arange(len(order))
     tick_text = [int_to_state[i] for i in tick_values]
 
@@ -375,7 +351,6 @@ def display_error_heatmap(
         colorbar_title='Prediction State'
     )
 
-    # 6. Optional Layout Adjustments
     fig.update_layout(
         autosize=False,
         width=800,
@@ -396,16 +371,12 @@ def display_label_cardinality_error(
     if not isinstance(y_pred, np.ndarray):
         y_pred = y_pred.toarray()
 
-    # 1. Calculate Cardinalities (Sum across the label axis, axis=1)
     true_cardinality = np.sum(y_true, axis=1)
     pred_cardinality = np.sum(y_pred, axis=1)
 
-    # 2. Calculate Hamming Loss per sample
-    # Hamming loss for sample i = (number of mismatches) / N_LABELS
     mismatches = np.sum(y_true != y_pred, axis=1)
     hamming_loss_Score_ = mismatches / y_true.shape[1]
 
-    # 3. Create the Visualization DataFrame
     df_error_vis = pd.DataFrame({
         'Sample_ID': [f'Sample_{i}' for i in range(y_true.shape[0])],
         'True_Cardinality': true_cardinality,
@@ -418,16 +389,12 @@ def display_label_cardinality_error(
         df_error_vis,
         x='True_Cardinality',
         y='Predicted_Cardinality',
-        # Color the points by the error metric
         color='Hamming_Loss_Score_',
-        # Scale the size of the points by the number of errors
-        # size='Total_Errors',
         hover_data=['Sample_ID', 'Total_Errors'],
         title='Multilabel Error Analysis: Predicted vs. True Label Cardinality',
-        color_continuous_scale=px.colors.sequential.Plasma, # Use a good sequential color scale
+        color_continuous_scale=px.colors.sequential.Plasma,
     )
 
-    # Set axis limits and labels for a clear square comparison
     max_cardinality = y_true.shape[1]
     fig.update_xaxes(
         range=[-0.5, max_cardinality + 0.5],
@@ -440,7 +407,6 @@ def display_label_cardinality_error(
         title="Predicted Label Cardinality (Model Output)"
     )
 
-    # Add a diagonal line for perfect cardinality prediction (where X=Y)
     fig.add_shape(
         type="line", line=dict(dash='dash', color='gray'),
         x0=0, y0=0, x1=max_cardinality, y1=max_cardinality
@@ -461,15 +427,12 @@ def display_hyperparameter_sensitivity(
     df_results['upper_bound'] = df_results[mean_column] + df_results[std_column].abs()
     df_results['lower_bound'] = df_results[mean_column] - df_results[std_column].abs()
 
-    # --- 2. Create Plotly Figure ---
     fig = go.Figure()
 
-    # 2a. Add the Filled Area (Error Band)
-    # We plot the upper bound, then the lower bound in reverse, and connect them using fill='toself'
     fig.add_trace(go.Scatter(
         x=df_results[hyperparameter_column],
         y=df_results['upper_bound'],
-        line=dict(width=0), # Hide the line for the upper bound
+        line=dict(width=0),
         mode='lines',
         showlegend=False
     ))
@@ -477,46 +440,39 @@ def display_hyperparameter_sensitivity(
     fig.add_trace(go.Scatter(
         x=df_results[hyperparameter_column],
         y=df_results['lower_bound'],
-        line=dict(width=0), # Hide the line for the lower bound
+        line=dict(width=0), 
         mode='lines',
-        fill='tonexty',     # Fill the area to the previous trace (the upper bound)
-        fillcolor='rgba(0, 0, 0, 0.3)', # alpha=0.3 equivalent
+        fill='tonexty',     
+        fillcolor='rgba(0, 0, 0, 0.3)',
         name='Std Error Band'
     ))
 
-    # 2b. Add the Mean Line
     fig.add_trace(go.Scatter(
         x=df_results[hyperparameter_column],
         y=df_results[mean_column],
-        line=dict(color='black', width=2), # color='k' equivalent
+        line=dict(color='black', width=2),
         mode='lines',
         name='Mean ' + scoring_name
     ))
 
-    # --- 3. Update Layout ---
     fig.update_layout(
         title='Hyperparameter Sensitivity:' + hyperparameter_name,
         xaxis_title=hyperparameter_name,
         yaxis_title='Cross-validated ' + scoring_name + ' with standard error',
-        # Enable grid lines (like plt.grid(True))
-        # Hide top and right borders (ax.spines['top/right'].set_visible(False))
-        plot_bgcolor='white',   # Sets the background color of the plotting area
-        paper_bgcolor='white',  # Sets the color of the entire figure/paper area
+        plot_bgcolor='white',
+        paper_bgcolor='white',
         xaxis=dict(
             showgrid=True,
-            gridcolor='lightgrey', # Set grid color (e.g., light grey)
+            gridcolor='lightgrey',
             gridwidth=1
         ), 
         yaxis=dict(
             showgrid=True,
-            gridcolor='lightgrey', # Set grid color
+            gridcolor='lightgrey',
             gridwidth=1
         ),
-        
-        # Customizing axes
         xaxis_showline=True, 
         yaxis_showline=True,
-
     )
 
     fig.show()
