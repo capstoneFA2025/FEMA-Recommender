@@ -13,6 +13,7 @@ from sklearn.metrics import hamming_loss
 from sklearn.metrics import average_precision_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import classification_report
+from sklearn.metrics import jaccard_score
 from sklearn.naive_bayes import GaussianNB
 from skmultilearn.problem_transform import BinaryRelevance
 from skmultilearn.problem_transform import ClassifierChain
@@ -27,6 +28,10 @@ from mlxtend.evaluate.time_series import plot_splits
 from mlxtend.evaluate.time_series import print_cv_info
 from mlxtend.evaluate.time_series import print_split_info
 import optuna
+from functools import partial
+import plotly.express as px
+import plotly.io as pio
+import plotly.graph_objects as go
 from collected_functions import *
 
 
@@ -69,6 +74,47 @@ def create_set(
 
     return X, y
 
+def create_set_AR(
+        df: pd.DataFrame,
+        grouping_columns: list,
+        list_set_columns: list,
+        feature_columns: list,
+        target_column: str,
+        ) ->tuple[pd.DataFrame, pd.Series]:
+    """
+    Create X and y sets from a DataFrame and desired columns for each
+
+    Returns X and y
+    """
+    df_predict = df.copy()
+    # This groupby process will combine resulting target values into a list
+    # This helps the model understand the connections between features and target values
+    
+    for col in feature_columns:
+        # Use a lambda to check if the value is iterable (like a list/array) and join it.
+        # This handles lists of strings, lists of numbers, or NumPy arrays.
+        # .apply(str) handles cases where the column might contain a mix of lists and non-lists.
+        df_predict[col] = df_predict[col].apply(
+            lambda x: ','.join(map(str, x)) if isinstance(x, (list, np.ndarray)) else x
+        )
+
+    df_predict = df_predict.groupby(
+            grouping_columns,
+        )[list_set_columns].agg(
+            lambda x: list(set(x))
+        ).reset_index()
+    df_predict = df_predict.sort_values(
+            by='year',
+            ascending=True
+        )
+
+    X = df_predict[feature_columns]
+    y = df_predict[target_column]
+
+    return X, y
+
+
+
 class MultiLabelBinarizerTransformer(BaseEstimator, TransformerMixin):
     '''
     This was created with the help of an LLM as including MLB in a pipeline is not
@@ -107,6 +153,7 @@ def transform_x_y_train(
     feature_columns: list,
     multilabel_feature_columns: list,
     target_column: str,
+    target_string: str,
     ) ->tuple[pd.DataFrame, pd.DataFrame, any, any]:
     """
     Transform X and y for use with future models.
@@ -136,7 +183,7 @@ def transform_x_y_train(
 
     y_transformed = transformer_y.fit_transform(y)
     feature_names_y = transformer_y.classes_
-    feature_names_y = ['ESF_' + str(int(x)) for x in feature_names_y]
+    feature_names_y = [target_string + str(int(x)) for x in feature_names_y]
     y_transformed = pd.DataFrame(y_transformed, columns=feature_names_y)
     
     return X_transformed, y_transformed, transformer_X, transformer_y
@@ -162,6 +209,10 @@ def display_results(
         y_data_transformed:pd.DataFrame,
         predictions_dense: any
         ):
+    
+    if not isinstance(predictions_dense, np.ndarray):
+        predictions_dense = predictions_dense.toarray()
+
     print(f"True Multi-Label Targets:\n{y_data_transformed.head(5)}")
     print(f"\nPredicted Multi-Label Targets:\n{predictions_dense[:5]}")
 
@@ -182,6 +233,12 @@ def display_results(
                               average='macro',
                               )
     print(f"\nMacro F1 Score: {macro_f1_score:.2f}")
+
+    jaccard_sim_score = jaccard_score(y_data_transformed,
+                                      predictions_dense,
+                                      average='samples',
+                                    )
+    print(f"\nJaccard Similarity Score (Samples): {jaccard_sim_score:.2f}")
 
     report = classification_report(y_data_transformed,
                                    predictions_dense,
@@ -209,5 +266,257 @@ def display_results(
     percent_matching_cells = total_matching_cells/y_data_transformed.shape[0]
     print(percent_matching_cells, np.mean(percent_matching_cells))
 
-    combined_score = subset_accuracy + (1-hamming_loss_score) + map_score + macro_f1_score
+    combined_score = subset_accuracy + (1-hamming_loss_score) + map_score + macro_f1_score# + jaccard_sim_score
     print(f"\nCombined Metrics Score: {combined_score:.2f}")
+    print("\nSum of Subset Accuracy, 1-Hamming Loss, Mean Average Precsion, Macro F1, and Jaccard Similarity (samples) scores")
+
+def combined_score(y_true, y_pred):
+
+    hamming_loss_score = hamming_loss(y_true, y_pred)
+
+    map_score = average_precision_score(y_true,
+                                        y_pred,
+                                        average='macro',
+                                        )
+
+    macro_f1_score = f1_score(y_true,
+                              y_pred,
+                              average='macro',
+                              zero_division=1,
+                              )
+
+    samples_f1_score = f1_score(y_true,
+                              y_pred,
+                              average='samples',
+                              zero_division=1,
+                              )
+
+    combined_score = -hamming_loss_score + map_score + macro_f1_score + samples_f1_score
+    return combined_score
+
+def display_error_heatmap(
+        y_true: pd.DataFrame,
+        y_pred: np.array,
+    ) ->None:
+    '''
+    Create an error heatmap from y_true and y_pred. Created with the help of Google Gemini
+    '''
+
+    if not isinstance(y_pred, np.ndarray):
+        y_pred = y_pred.toarray()
+    
+    # Calculate the four states for every cell (sample x label)
+    is_TP = (y_true == 1) & (y_pred == 1)
+    is_TN = (y_true == 0) & (y_pred == 0)
+    is_FP = (y_true == 0) & (y_pred == 1)
+    is_FN = (y_true == 1) & (y_pred == 0)
+
+    # Create an empty matrix to hold the final state codes
+    prediction_states = np.empty(y_true.shape, dtype=object)
+
+    # Assign a categorical string based on the state.
+    prediction_states[is_TP] = 'True Positive (TP)'
+    prediction_states[is_TN] = 'True Negative (TN)'
+    prediction_states[is_FP] = 'False Positive (FP)'
+    prediction_states[is_FN] = 'False Negative (FN)'
+
+    # Convert the 2D matrix into a long-format Pandas DataFrame
+    df_vis = pd.DataFrame(prediction_states, columns=y_true.columns)
+    df_vis['Sample'] = [f'Sample_{i}' for i in range(len(y_true))]
+    df_vis_long = df_vis.melt(
+        id_vars='Sample',
+        var_name='Label',
+        value_name='Prediction_State',
+        )
+    # Define the order and mapping to numerical IDs (required for imshow)
+    order = ['True Negative (TN)', 'True Positive (TP)', 'False Negative (FN)', 'False Positive (FP)']
+    color_map = {
+        'True Positive (TP)': 'green',
+        'True Negative (TN)': 'lightgray',
+        'False Negative (FN)': 'orange',
+        'False Positive (FP)': 'red'
+    }
+
+    # 1. Create a mapping dictionary from string state to integer ID
+    state_to_int = {state: i for i, state in enumerate(order)}
+    int_to_state = {i: state for i, state in enumerate(order)}
+    color_scale = [color_map[state] for state in order]
+
+    # 2. Convert the categorical prediction_states array into a numerical ID matrix
+    prediction_ids = np.vectorize(state_to_int.get)(prediction_states)
+
+    # 3. Use pandas to organize the final numerical matrix
+    df_matrix = pd.DataFrame(
+        prediction_ids,
+        index=[f'Sample_{i}' for i in range(len(y_true))],
+        columns=y_true.columns
+    )
+
+    # 4. Visualization with px.imshow
+
+    fig = px.imshow(
+        df_matrix.values, # Pass the numerical matrix values
+        x=df_matrix.columns,
+        y=df_matrix.index,
+        color_continuous_scale=color_scale, # Use the custom colors
+        title="Prediction Error Matrix (Sample vs. Label)",
+    )
+
+    # 5. Fix the Color Bar Ticks and Labels (to show the categorical state names)
+    # imshow only accepts numerical input, so we must manually override the color bar
+
+    # Calculate the center position for the ticks
+    tick_values = np.arange(len(order))
+    tick_text = [int_to_state[i] for i in tick_values]
+
+    fig.update_coloraxes(
+        colorbar_tickvals=tick_values,
+        colorbar_ticktext=tick_text,
+        colorbar_title='Prediction State'
+    )
+
+    # 6. Optional Layout Adjustments
+    fig.update_layout(
+        autosize=False,
+        width=800,
+        height=600,
+        yaxis={'categoryorder':'category descending'}
+    )
+
+    fig.show()
+
+def display_label_cardinality_error(
+        y_true: pd.DataFrame,
+        y_pred: np.ndarray,
+    ) ->None:
+    '''
+    Create a scatterplot from y_true and y_pred to show accuracy of number of labels predicted.
+    Created with the help of Google Gemini
+    '''
+    if not isinstance(y_pred, np.ndarray):
+        y_pred = y_pred.toarray()
+
+    # 1. Calculate Cardinalities (Sum across the label axis, axis=1)
+    true_cardinality = np.sum(y_true, axis=1)
+    pred_cardinality = np.sum(y_pred, axis=1)
+
+    # 2. Calculate Hamming Loss per sample
+    # Hamming loss for sample i = (number of mismatches) / N_LABELS
+    mismatches = np.sum(y_true != y_pred, axis=1)
+    hamming_loss_Score_ = mismatches / y_true.shape[1]
+
+    # 3. Create the Visualization DataFrame
+    df_error_vis = pd.DataFrame({
+        'Sample_ID': [f'Sample_{i}' for i in range(y_true.shape[0])],
+        'True_Cardinality': true_cardinality,
+        'Predicted_Cardinality': pred_cardinality,
+        'Hamming_Loss_Score_': hamming_loss_Score_,
+        'Total_Errors': mismatches
+    })
+
+    fig = px.scatter(
+        df_error_vis,
+        x='True_Cardinality',
+        y='Predicted_Cardinality',
+        # Color the points by the error metric
+        color='Hamming_Loss_Score_',
+        # Scale the size of the points by the number of errors
+        # size='Total_Errors',
+        hover_data=['Sample_ID', 'Total_Errors'],
+        title='Multilabel Error Analysis: Predicted vs. True Label Cardinality',
+        color_continuous_scale=px.colors.sequential.Plasma, # Use a good sequential color scale
+    )
+
+    # Set axis limits and labels for a clear square comparison
+    max_cardinality = y_true.shape[1]
+    fig.update_xaxes(
+        range=[-0.5, max_cardinality + 0.5],
+        tickvals=np.arange(0, max_cardinality + 1),
+        title="True Label Cardinality (Complexity)"
+    )
+    fig.update_yaxes(
+        range=[-0.5, max_cardinality + 0.5],
+        tickvals=np.arange(0, max_cardinality + 1),
+        title="Predicted Label Cardinality (Model Output)"
+    )
+
+    # Add a diagonal line for perfect cardinality prediction (where X=Y)
+    fig.add_shape(
+        type="line", line=dict(dash='dash', color='gray'),
+        x0=0, y0=0, x1=max_cardinality, y1=max_cardinality
+    )
+
+    fig.show()
+
+def display_hyperparameter_sensitivity(
+        df_results: pd.DataFrame,
+        hyperparameter_column: str,
+        mean_column: str,
+        std_column: str,
+        hyperparameter_name: str,
+        scoring_name: str,
+    ) -> None:   
+    
+    # Calculate the upper and lower bounds for the error band
+    df_results['upper_bound'] = df_results[mean_column] + df_results[std_column].abs()
+    df_results['lower_bound'] = df_results[mean_column] - df_results[std_column].abs()
+
+    # --- 2. Create Plotly Figure ---
+    fig = go.Figure()
+
+    # 2a. Add the Filled Area (Error Band)
+    # We plot the upper bound, then the lower bound in reverse, and connect them using fill='toself'
+    fig.add_trace(go.Scatter(
+        x=df_results[hyperparameter_column],
+        y=df_results['upper_bound'],
+        line=dict(width=0), # Hide the line for the upper bound
+        mode='lines',
+        showlegend=False
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=df_results[hyperparameter_column],
+        y=df_results['lower_bound'],
+        line=dict(width=0), # Hide the line for the lower bound
+        mode='lines',
+        fill='tonexty',     # Fill the area to the previous trace (the upper bound)
+        fillcolor='rgba(0, 0, 0, 0.3)', # alpha=0.3 equivalent
+        name='Std Error Band'
+    ))
+
+    # 2b. Add the Mean Line
+    fig.add_trace(go.Scatter(
+        x=df_results[hyperparameter_column],
+        y=df_results[mean_column],
+        line=dict(color='black', width=2), # color='k' equivalent
+        mode='lines',
+        name='Mean ' + scoring_name
+    ))
+
+    # --- 3. Update Layout ---
+    fig.update_layout(
+        title='Hyperparameter Sensitivity:' + hyperparameter_name,
+        xaxis_title=hyperparameter_name,
+        yaxis_title='Cross-validated ' + scoring_name + ' with standard error',
+        # Enable grid lines (like plt.grid(True))
+        # Hide top and right borders (ax.spines['top/right'].set_visible(False))
+        plot_bgcolor='white',   # Sets the background color of the plotting area
+        paper_bgcolor='white',  # Sets the color of the entire figure/paper area
+        xaxis=dict(
+            showgrid=True,
+            gridcolor='lightgrey', # Set grid color (e.g., light grey)
+            gridwidth=1
+        ), 
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='lightgrey', # Set grid color
+            gridwidth=1
+        ),
+        
+        # Customizing axes
+        xaxis_showline=True, 
+        yaxis_showline=True,
+
+    )
+
+    fig.show()
