@@ -194,6 +194,23 @@ def transform_x_y_test(
 
     return X_test_transformed, y_test_transformed
 
+def transform_x_y_testAR(
+        X_test: pd.DataFrame,
+        y_test: pd.Series,
+        transformer_X: ColumnTransformer,
+        transformer_y: MultiLabelBinarizer,
+    ) ->tuple[pd.DataFrame, pd.Series]:
+    X_test_transformed = transformer_X.transform(X_test)
+    feature_names_x = transformer_X.get_feature_names_out()
+    X_test_transformed = pd.DataFrame(X_test_transformed, columns=feature_names_x)
+
+    y_test_transformed = transformer_y.transform(y_test)
+    feature_names_y = transformer_y.classes_
+    feature_names_y = ['cluster_' + str(int(x)) for x in feature_names_y]
+    y_test_transformed = pd.DataFrame(y_test_transformed, columns=feature_names_y)
+
+    return X_test_transformed, y_test_transformed
+
 def display_results(
         y_data_transformed:pd.DataFrame,
         predictions_dense: any
@@ -476,3 +493,15 @@ def display_hyperparameter_sensitivity(
     )
 
     fig.show()
+
+def compare_true_to_pred(
+        row,
+        X_test,
+        y_test,
+        y_pred
+    ):
+    df_compare = y_test.iloc[row].to_frame(name='true')
+    df_compare['predicted'] = y_pred[row].T
+    non_matching_labels = df_compare[df_compare['true'] != df_compare['predicted']]
+    matching_positive_labels = df_compare[(df_compare['true'] == 1) & (df_compare['predicted']== 1)]
+    print(X_test.iloc[row], '\n', non_matching_labels, '\n', matching_positive_labels)
