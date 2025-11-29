@@ -141,7 +141,7 @@ if sys_select=='Recommend mission assignments':
         st.header('Step 3: Search for Statements of Work')
         cap=st.text_input('Please enter a capability',None)
         if cap!=None:
-            index, topics = build_index('SOW_topics.txt')
+            index, topics = build_index('SoW_topics.txt')
             doc_search(cap, index, topics)
 
 else:
@@ -154,7 +154,8 @@ else:
         doc_search(cap, index, topics)
 
         st.header('Suggested Statements of Work')
-        index_sow, topics_sow = build_index('SOW_topics.txt')
+        index_sow, topics_sow = build_index('SoW_topics.txt')
 
         doc_search(cap, index_sow, topics_sow)
+
 
