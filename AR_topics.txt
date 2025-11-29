@@ -19,7 +19,7 @@
 18 - Request USEPA to deploy personnel to coordinate with USACE and execute all necessary assessments, evaluations, sampling and analysis services/support and other necessary actions associated with ensuring the safety and quality of drinking water (DW) and wastewater (WW) systems. 
 19 - Request EPA oil and hazmat field operations in support of disaster operations in response to incident to include assessment of potential health threats to the public and responders, and the segregation and disposal of hazardous materials.
 20 - DOD to provide a Task Force to provide Command and Control of DOD assets in support of disaster operations.
-21 - (T-32) DOD provide up to XXX personnel to assist state to execute emergency protective measures to mitigate the impacts.
+21 - (T32) DOD provide up to XXX personnel to assist state to execute emergency protective measures to mitigate the impacts.
 22 - USAF Auxiliary, Civil Air Patrol (CAP) aerial support.
 23 - Activate {agency} to NRCC.
 24 - Activate {agency} to RRCC, IOF, or JFO as requested.
@@ -42,7 +42,7 @@
 41 - Activate Department of Agriculture (USDA) to the Regional Response Coordination Center (RRCC), IOF, JFO or as directed to support of disaster operations. 
 42 - Activate CISA ESF-2 to RRCC, IOF, JFO. 
 43 - DOD may provide up to XXX personnel to assist state to execute emergency protective measures to mitigate impacts.
-44 - USACE pre-position in preparation for providing assessments of potentially affected infrastructure in support of disaster operations.
+44 - USACE preposition in preparation for providing assessments of potentially affected infrastructure in support of disaster operations.
 45 - {Agency} will provide DHS/FEMA with additional staff to augment existing cadres in response to Presidentially Declared disaster/incident(s) as needed. 
 46 - DLA provide and/or distribute fuel.
 47 - Activate Department of Health and Human Services (HHS) to the Regional Response Coordination Center (RRCC), IOF, JFO or as directed to perform duties of Emergency Support Function (ESF) 8, in support of disaster operations.
