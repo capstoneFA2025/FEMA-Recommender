@@ -19,17 +19,16 @@ cols=['state_AK','state_AL','state_AR','state_AS','state_AZ','state_CA','state_C
 
 df = pd.DataFrame(0,index=[0],columns=cols)
 
-def stage_one_input(incident_types,dec_type,region):
-    
+def stage_one_input(incident_types,state,dec_type):#,region):
+    """Function accepts input from user selection, which is returned as a list"""
     for i in incident_types:
         inc='designatedIncidentTypes_'+i
         df[inc]+=1
+
+    df['state_'+state]+=1
     
     df['declarationType_'+dec_type]+=1
 
-    df['region_'+str(region[0])]+=1
+    #df['region_'+str(region)]+=1
 
-    return df
-
-
-    
+    return df  
