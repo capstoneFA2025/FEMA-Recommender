@@ -1,0 +1,126 @@
+0 - Request for the establishment and operation of one Community Vaccination Center at a fixed facility site. Location to be determined by the State in coordination with FEMA. Request includes full Federal support at each location, including staffing (clinical and non clinical), vaccines, equipment, supplies and vaccines.
+1 - Activate and deploy personnel to RRCC, EOC, or JFO, or other facilities to include virtually in support of FEMA disaster operations.
+2 - Activate U.S. Army Corps of Engineers (USACE) to the Regional Response Coordination Center (RRCC), IOF, JFO or as directed to support disaster operations.
+3 - USACE to provide personnel to support FEMA with execution of their Public Assistance Program in support of recovery efforts. 
+4 - Activate Health and Human Services (HHS) for staging and support from appropriate HHS personnel to perform the functions of ESF8 in/with the RRCC, IOF, JFO, Incident Management Assistance Teams (IMAT), Preliminary Damage Assessment (PDA) Teams, or other public health/medical teams and subject matter experts at various locations to support disaster operations.
+5 - HHS will provide the appropriate medical personnel to administer vaccines (vaccinators) as directed and at locations determined by FEMA and the State. As needed designated staff provide clinical oversight.
+6 - DoD medical staff to provide a deployable, temporary and scalable medical staff to the State.
+7 - Request DoD Medical Response Team(s) to augment hospital staff
+8 - DOD provide and support facility(s) as a FEMA Incident Support Base (ISB), Federal Staging Area (FSA), and/or FEMA Federal Team Staging Facility (FTSF).
+9 - (SCF) As directed by and in coordination with FEMA, {agency} will provide Surge Capacity Force personnel consisting of permanent agency staff willing to deploy for a field assignment to augment FEMAs disaster operations.
+10 - USFS to provide Incident Management Team(s):  Provide support to organize and assist with incident management structure/organization in support of emergency relief activities
+11 - VHA to provide any or all the following VHA capabilities: 24-hour medical/administrative/support staff, medical/nonmedical equipment, sustenance, supplies, pharmaceuticals, and ancillary services to care for critical and noncritical, nonveteran patients.
+12 - Request USACE provide planning and preparation for debris clearance, removal, and/or disposal in support of FEMA response operations.
+13 - Activate GSA to support logistics operations in searching and leasing of multiple buildings.
+14 - Activate GSA to RRCC, IOF, JFO, or other teams and facilities as requested.
+15 - Activation of {ESF} Representatives to the RRCC, IOF/JFO, and/or other facilities in support of FEMA disaster operations.
+16 - Request USACE to pre-position emergency power generation to the affected area in support of FEMA response operations. 
+17 - Request NOAA deploy aircraft, survey crew and remote sensing equipment to provide decision relevant information regarding the nature and extent of an incident and cascading effects in support of FEMA response operations. 
+18 - Request USEPA to deploy personnel to coordinate with USACE and execute all necessary assessments, evaluations, sampling and analysis services/support and other necessary actions associated with ensuring the safety and quality of drinking water (DW) and wastewater (WW) systems. 
+19 - Request EPA oil and hazmat field operations in support of disaster operations in response to incident to include assessment of potential health threats to the public and responders, and the segregation and disposal of hazardous materials.
+20 - DOD to provide a Task Force to provide Command and Control of DOD assets in support of disaster operations.
+21 - (T-32) DOD provide up to XXX personnel to assist state to execute emergency protective measures to mitigate the impacts.
+22 - USAF Auxiliary, Civil Air Patrol (CAP) aerial support.
+23 - Activate {agency} to NRCC.
+24 - Activate {agency} to RRCC, IOF, or JFO as requested.
+25 - {Agency} representative(s) to Federal Search and Rescue Coordination Group (FSARCG) 
+26 - Activate CNCS to deploy to the Joint Field Office in support of disaster operations.
+27 - Request {agency} provide medical personnel and capabilities.
+28 - USGS Field measurements of flood-water heights in impacted communities.
+29 - Request DOD provide strategic air transportation of personnel (non-medical patients) and/or cargo, in support of FEMA response operations. 
+30 - Activate USFS to the RRCC, IOF, JFO, or other facilities. 
+31 - FPS to provide security guard services at FEMA facilities.
+32 - {Agency} liaison(s) to the RRCC, IOF, JFO, or other FEMA teams or facilities as requested
+33 - HHS will provide assessments of medical needs and address public health communications in affected areas.
+34 - Activate USACE to the RRCC, IOF, JFO, or other facilities.
+35 - Activate {agency} liaison(s) to NRCC.
+36 - Request USACE activate and deploy Subject Matter Experts (SMEs) to provide technical expertise in support of disaster operations.
+37 - Activate USDA liaison to the RRCC, IOF, JFO, or other FEMA teams or facilities as requested.
+38 - Activate DOJ to RRCC, IOF, JFO, or other facilities to support FEMA disaster operations.
+39 - Activate Department of Defense (DoD) to FEMAs Regional Response Coordination Centers (RRCC), Joint Field Office (JFO), or other locations as specified by FEMA in support of disaster operations.
+40 - Request U.S. Coast Guard (USCG) Search and Rescue capable rotary wing assets with full crew including hoist/rescue swimmer to stage at locations determined by USCG for response operations.
+41 - Activate Department of Agriculture (USDA) to the Regional Response Coordination Center (RRCC), IOF, JFO or as directed to support of disaster operations. 
+42 - Activate CISA ESF-2 to RRCC, IOF, JFO. 
+43 - DOD may provide up to XXX personnel to assist state to execute emergency protective measures to mitigate impacts.
+44 - USACE pre-position in preparation for providing assessments of potentially affected infrastructure in support of disaster operations.
+45 - {Agency} will provide DHS/FEMA with additional staff to augment existing cadres in response to Presidentially Declared disaster/incident(s) as needed. 
+46 - DLA provide and/or distribute fuel.
+47 - Activate Department of Health and Human Services (HHS) to the Regional Response Coordination Center (RRCC), IOF, JFO or as directed to perform duties of Emergency Support Function (ESF) 8, in support of disaster operations.
+48 - Tennessee Valley Authority (TVA) to deploy appropriate personnel in support of recovery efforts. 
+49 - (SCF)  {Agency} provide DHS/FEMA with additional staff to augment existing cadres.
+50 - Activate EPA to RRCC, IOF, JFO, or other teams and facilities as requested.
+51 - Activate {agency} to NRCC to support FEMA response operations.
+52 - Provide FEMA with support for technical expertise of State and/or local entities debris operations. 
+53 - Request U.S. Customs and Border Protection (CBP) Air and Marine Operations to provide medium and light-lift rotary and fixed wing assets to support Federal mission requirements for SAR, passenger, commodity, and equipment aerial transport. 
+54 - Provide security officers as required by the field security manager and/or regional security officer (RSO) at various venues in support of disaster operations. Initial request for Level II Armed Security Protective Services Officers to support the protection of FEMA facilities, personnel, and property.
+55 - Requesting BVI to provide PA support staff. 
+56 - (SCF) {Agency} to provide DHS/FEMA with staff to augment existing cadres
+57 - Activate {agency} to support FEMA response operations.
+58 - Activate NOAA to NRCC to support FEMA disaster operations.
+59 - Activate {agency} to RRCC, IOF, JFO, or other team(s) and facilities as requested. 
+60 - Deploy Public Affairs Officer subject matter expert from {agency} to perform duties associated with Emergency Support Function (ESF) #15.
+61 - Activate and deploy {agency} RRCC, IOF, or JFO or other locations and facilities.
+62 - Provide rotary wing aircraft to conduct movement of personnel and/or supplies in support of disaster operations.
+63 - Cost share adjustment.
+64 - Provide ground transportation to move cargo and/or passengers using DoD ground transportation assets in support of disaster operations.
+65 - Contract security officers to support the FEMA Security Manager (SM).
+66 - Request for the U.S. Army Corps of Engineers to provide initial planning and engineering support.
+67 - USACE pre-position the Temporary Roofing SME Planning Cell, and ACI Contractor Planning Cell to provide event specific planning and preparation.
+68 - Procure generators to augment existing FEMA inventory in support of specifically identified Temporary Emergency Power mission requirements as directed by FEMA.
+69 - DOJ and other Federal Law Enforcment Agencies in support of ESF #13 will deploy armed Federal Law Enforcement Officers (FLEO) Quick Response Teams (QRT) or other security teams, as required, and activate personnel and/or contractors to the ESF #13 National Coordination Center (NCC), the ESF #13 Field Coordination Center (FCC) or other FEMA teams/facilities to provide Force Protection, Security, and General Law Enforcement as requested by and in coordination with FEMA. 
+70 - As directed by the state and FEMA and in coordination with HHS (ESF#8), the U.S. Army Corps of Engineers shall provide facility assessments, planning, engineering, design, contracting and construction support to address medical facility shortages.
+71 - FCC spectrum management coordination in support of disaster operations.
+72 - Activate {agency} to NRCC to support. 
+73 - Activate United States Forest Service (USFS) and Department of Interior (DOI) to provide Operational Support to ESF 4 mission assigned resources.
+74 - At the direction and in coordination with FEMA and HHS, Defense Logistics Agency (DLA) will procure and deliver PPE. 
+75 - (T32) DOD provide up to XXX personnel to assist states to execute emergency protective measures
+76 - Activate and deploy {agency} to RRCC, IOF, JFO to include virtual in support of disaster operations. 
+77 - Activate Housing and Urban Development (HUD) to provide personnel to perform duties of ESF-6 in support of disaster operations.
+78 - Activation for appropriate GSA personnel to perform the functions of ESF 7 in the RRCC, IOF, JFO, Incident Management Assistance Team(IMAT), Preliminary Damage Assessment (PDA) Team, or other teams and locations to support disaster operations.
+79 - Activate {agency} to perform duties in support of disaster operations. Resources will support deployed assets in the field (IMAT) supporting the State EOC, staging areas, the Regional Response Coordination Center (RRCC), or other locations as designated necessary by FEMA.
+80 - Activate DOT to RRCC. IOF, JFO, or others teams and facilities as requested.
+81 - Deploy USCG liaison officer(s) to RRCC, IOF, JFO, STT EOC or other facility(s).
+82 - Request an HHS provided XXX bed Federal Medical Station (FMS) to support acute and nonacute patients.
+83 - Activate and deploy  {agency} to RRCC, IOF or JFO or other locations and facilities to include virtual to support disaster operations.
+84 - The U.S. Department of Transportation will establish a toll free Routing Assistance Hotline for emergency responders in support of disaster operations
+85 - As requested by and in coordination with FEMA, DOD will provide a Defense Coordinating Officer/Element (DCO/E) supporting staff and services and back up Defense Coordinating Officer/Element (DCO/E) supporting staff and services as required/requested. Regional and State Emergency Preparedness Liaison Officers (REPLOS and SEPLOS) to the RRCC, IOF, or other locations to provide DOD regional knowledge, requirements validation, and liaison.
+86 - As requested by and in coordination with FEMA, DOD will provide a Defense Coordinating Officer/Element (DCO/E) supporting staff and services and back up Defense Coordinating Officer/Element (DCO/E) supporting staff and services as required/requested. Regional and State Emergency Preparedness Liaison Officers (REPLOS and SEPLOS) to the RRCC, IOF, or other locations to provide DOD regional knowledge, requirements validation, and liaison.
+87 - Requested ESF 10 assistance in support of assessment and response operations to actual or threatened hazardous materials and oil releases/discharge. This assistance includes response to release/discharges from fixed facilities, as well as orphaned containers and mobile sources. 
+88 - Activate General Services Administration (GSA) to Regional Response Coordination Center (RRCC), IOF, JFO or as directed to support of disaster operations.
+89 - DOD provide personnel and equipment to assist states to execute emergency protective measures to mitigate.
+90 - EPA to NRCC or other teams and facilities as requested.
+91 - Activate CISA LNOs to RRCC, JFO, IOF.
+92 - Provide GSA broker to accompany Field Office (FO) search team and negotiate a new lease(s) for FO purposes.
+93 - Request HHS-CDC assistance implementing and managing testing sites.
+94 - Activation of the Natural and Cultural Resources Recovery Support Function (RSF) Coordinating Agency (U.S. Department of Interior (DOI)).
+95 - Activate DOI to NRCC. 
+96 - Requesting ventilator kits through SNS resources.
+97 - Activate DOE to RRCC. IOF, JFO, or other team(s) and facilities as requested.
+98 - Activate appropriate ESF X staff to the NRCC.
+99 - Activate HUD to RRCC, IOF, JFO, or other teams and facilities, as requested.
+100 - Activate General Services Administration (GSA)to perform duties of Emergency Support Function (ESF) #7.
+101 - Requested SCF to support Disaster Survivor Assistance ,Individual Assistance, External Affairs and Field Leadership missions.
+102 - Fund obligation (discard).
+103 - Activate {agency} to RRCC, IOF, or JFO to support FEMA disaster operations.
+104 - HHS provide pharmaceutical supplies, limited durable medical equipment (DME), and personnel.
+105 - Requesting DOJ/ATF to provide force protection personnel and a support personnel element for disaster response missions.
+106 - Request DLA provide meals and MREs in support of response operations.
+107 - USACE specialized expertise for oversight of debris operations in support of disaster operations.
+108 - Activate GSA to RRCC, IOF, JFO, or other teams and facilities as requested.
+109 - Request USCG provide planning and preparation for oil/hazardous materials clearance, removal, and/or disposal in support of FEMA response operations.
+110 - SCF will provide FEMA with personnel in support of disaster operations.
+111 - HHS/Strategic National Stockpile for XXXX Surgical Grade N-95 Respirators.
+112 - Activate GSA to the NRCC.
+113 - (T32) DOD provide up to XXX personnel to assist states to execute emergency protective measures.
+114 - Activate {agency} to RRCC, IOF, or JFO or other locations and facilities to include virtual to support FEMA disaster operations.
+115 - (T32) DOD provide personnel and equipment to assist states to execute emergency protective measures.
+116 - Request funding for the fulfillment through SNS for immediate and urgent requirements of Nitrile Gloves PPE.
+117 - NGA Geospatial Intelligence (GEOINT) support to the FEMA Urban Search and Rescue Incident Support Team.
+118 - Activate GSA to provide Real Estate Specialist in support of FEMA, in efforts to locate potential facilities in various cities/towns.
+119 - Provide Surge Capacity Force personnel consisting of permanent agency staff willing to deploy for a field assignment to augment FEMA disaster operations.
+120 - General Support Personnel: Activities include but are not limited to greeting, reception, check-in, general logistics, etc.
+121 - Activate GSA for reality search for a JFO and subordinate offices in surrounding locations throughout the state.  In addition, use of GSA in all matters of realty support, to include negotiations.
+122 - USACE National Local Government Liaisons (N-LGL) activate and deploy.
+123 - Activate DLA liaisons to NRCC.
+124 - Activate CBP to NRCC and other locations as directed by FEMA to support FEMA response operations.
+125 - DLA leased generators and/or electrical transformers.
