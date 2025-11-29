@@ -3,6 +3,8 @@ import nltk
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
+import streamlit as st
+import pandas as pd
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -11,15 +13,15 @@ def build_index(doc):
     with open(doc,'r') as file:
         lines = file.readlines()
 
-    #convert topics ('documents') to tokens, the store in a dictionary
-    stop_words = set(stopwords.words("english"))
-    stemmer = PorterStemmer()
-
+    #convert topics ('documents') to tokens, then store in a dictionary
+    
     docs = {}
     topics = {}
     #counter = 1
 
     for line in lines:
+        stop_words = set(stopwords.words("english"))
+        stemmer = PorterStemmer()
         line.strip()
         tokens = word_tokenize(line)
         pos = tokens[0]
@@ -38,6 +40,7 @@ def build_index(doc):
     term_index={}
 
     for i in range(len(docs)):
+        
         doc_id='d'+str(i)
         #get terms from documents in order with doc_id
         terms=docs[doc_id]
@@ -64,10 +67,22 @@ def build_index(doc):
 def doc_search(query, index, topics):
     #takes a query string, index (dict) and topics (dict) as inputs, prints results
     q_toks = word_tokenize(query)
-    
+    stop_words = set(stopwords.words("english"))
+    stemmer = PorterStemmer()
+    accumulator={}
     for tok in q_toks:
         if tok not in stop_words:
             stem_tok = stemmer.stem(tok)
             if stem_tok in index:
                 for doc in index[stem_tok]:
-                    print(topics[doc])
+                    if doc not in accumulator:
+                        accumulator[doc]=1
+                    else:
+                        accumulator[doc]+=1
+    sort_accum=sorted(accumulator.items(), key=lambda item: item[1], reverse=True)
+    doc_sort=set([item[0] for item in sort_accum])
+    final_list=[]
+    for d in doc_sort:
+        final_list.append(topics[d])
+    st.write(pd.Series(final_list))
+                    #st.markdown(topics[doc])
