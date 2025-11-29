@@ -29,8 +29,10 @@ incident=['Biological','Chemical','Coastal Storm','Dam/Levee Break','Earthquake'
 
 dec_type=['DR','EM']
 
-esf=['ESF_0','ESF_1','ESF_2','ESF_3','ESF_4','ESF_5','ESF_6','ESF_7','ESF_8','ESF_9','ESF_10',
-     'ESF_11','ESF_12','ESF_13','ESF_14','ESF_15']
+#esf=['ESF_0','ESF_1','ESF_2','ESF_3','ESF_4','ESF_5','ESF_6','ESF_7','ESF_8','ESF_9','ESF_10',
+    # 'ESF_11','ESF_12','ESF_13','ESF_14','ESF_15']
+esf=['ESF_0.0','ESF_1.0','ESF_2.0','ESF_3.0','ESF_4.0','ESF_5.0','ESF_6.0','ESF_7.0','ESF_8.0','ESF_9.0','ESF_10.0',
+     'ESF_11.0','ESF_12.0','ESF_13.0','ESF_14.0','ESF_15.0']
 
 with open('trained_model_ESF.pkl', 'rb') as file:
     esf_model = pickle.load(file)
@@ -155,3 +157,4 @@ else:
         index_sow, topics_sow = build_index('SOW_topics.txt')
 
         doc_search(cap, index_sow, topics_sow)
+
