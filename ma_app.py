@@ -32,10 +32,10 @@ dec_type=['DR','EM']
 esf=['ESF_0','ESF_1','ESF_2','ESF_3','ESF_4','ESF_5','ESF_6','ESF_7','ESF_8','ESF_9','ESF_10',
      'ESF_11','ESF_12','ESF_13','ESF_14','ESF_15']
 
-with open('trained_model.pkl', 'rb') as file:
+with open('trained_model_ESF.pkl', 'rb') as file:
     esf_model = pickle.load(file)
 
-with open('trained_cluster_model_update.pkl','rb') as file2:
+with open('trained_model_AR_topic.pkl','rb') as file2:
     cluster_model = pickle.load(file2)
 
 st.title("Welcome to Responder Assist!")
@@ -153,4 +153,5 @@ else:
 
         st.header('Suggested Statements of Work')
         index_sow, topics_sow = build_index('SOW_topics.txt')
+
         doc_search(cap, index_sow, topics_sow)
