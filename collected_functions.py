@@ -3,37 +3,17 @@ import numpy as np
 import random
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.pipeline import make_pipeline
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.svm import SVC
+from sklearn.base import BaseEstimator
+from sklearn.base import TransformerMixin
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import hamming_loss
 from sklearn.metrics import average_precision_score
 from sklearn.metrics import f1_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import jaccard_score
-from sklearn.naive_bayes import GaussianNB
-from skmultilearn.problem_transform import BinaryRelevance
-from skmultilearn.problem_transform import ClassifierChain
-from skmultilearn.ensemble import MajorityVotingClassifier
-from skmultilearn.cluster import FixedLabelSpaceClusterer
-from skmultilearn.ensemble import RakelO
-from xgboost import XGBClassifier
-from sklearn.dummy import DummyClassifier
-from sklearn.model_selection import cross_val_score
-from mlxtend.evaluate.time_series import GroupTimeSeriesSplit
-from mlxtend.evaluate.time_series import plot_splits
-from mlxtend.evaluate.time_series import print_cv_info
-from mlxtend.evaluate.time_series import print_split_info
-import optuna
-from functools import partial
 import plotly.express as px
-import plotly.io as pio
 import plotly.graph_objects as go
-from collected_functions import *
-
 
 ### Classification Functions
 
