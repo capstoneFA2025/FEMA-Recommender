@@ -14,7 +14,15 @@ Our project creates a working user interface that allows users multiple options 
 ## How to run the code
 PLACE INFO HERE
 
+### Clustering notebooks?
+
+### Multilabel classification notebooks
+The exploratory data analysis notebooks (explore_ma.ipynb and explore_dds.ipynb) are just for exploratory purposes and do not create any essential files for the other notebooks to use. These both create visualizations as part of the analysis and explore_ma does save one visualization to a file. Merge_clean_and_split_stratified.ipynb performs the task of merging the MA, DDS, and AR Topic datasets together, then splits those into a training set and test set. This must be run in order to create the training and test parquet files used by the multilabel classification notebooks to create models for later use. Multilabel_classification_model_selection_ESF.ipynb should be run next to create the ESF prediction model, which will save to a pickle file as part of the notebook. Multilabel_classification_model_selection_AR_topics.ipynb is the next notebook to run as it will create and save the AR topic prediction model to a different pickle file. 
+
 MAKE NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
+
+### Streamlit app branch
+The files here do not need to be run as part of the project. They are used by the Streamlit site to provide a user interface to perform our inference and information retrieval functions. The front end is available at https://fema-recommendergit-se8dcweiaepgsg7ashtvna.streamlit.app/
 
 
 ## Does your dataset have any usage restrictions? Please check for a license associated with the dataset. 
