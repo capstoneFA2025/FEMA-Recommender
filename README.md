@@ -12,7 +12,7 @@ This project works off of two datasets available from FEMA. The first contains i
 Our project creates a working user interface that allows users multiple options to help them build mission assignments. They may start by providing the state, type of disaster(s), and declaration type (*need to describe this above*) and our first multilabel classification model will make recommendations of the ESFs most likely to accompany the submitted features. If the user wishes to start with their own list of ESFs, they can move on to the second part of the interface. After they make their selections of ESFs, that information and the previously selected features will be used by our second multilabel classification model to recommend AR topics to them to complete their assignments. These topics and related ... were grouped into clusters by a third model to provide the best related topics as determined by our .... Finally, the user can search for a Statement of Work based on information from the AR topics that were recommended. If the user wishes to start by simply searching for particular topics in both the AR topics and Statements of Work, they can start there instead.
 
 ## How the project is organized
-Notebooks for this project are split into separate folders, each with a requirements.txt file. This was done due to the very specific combination of libraries and associated versions necessary for the Large Language Model (LLM) notebook to function. 
+Notebooks for this project are split into separate folders, each with its own requirements.txt file. This was done due to the very specific combination of libraries and associated versions necessary for the Large Language Model (LLM) notebook to function. 
 
 ## How to run the code
 PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE?
@@ -24,21 +24,28 @@ PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE
 * MODEL NOTEBOOKS
 
 ### Obtaining the data files
-WE PROBABLY NEED TO CREATE A MAKEFILE THAT WILL DOWNLOAD THE MA AND DDS DATASETS FROM GOOGLE DRIVE. JOE'S NOTEBOOKS ARE USING A PARQUET VERSION INSTEAD OF CSV BUT MAYBE THIS SHOULD CHANGE?
+IS ANYONE USING CSV FILES INSTEAD OF PARQUET?
+
 A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the main branch of this repo, run the following command:
 
 ```
 make download-files
 ```
+
 The files downloaded are stored versions of the datasets rather than the versions currently on FEMA's website. This is because the files are continuously updated by FEMA, meaning that expected results could change based on new disaster declarations and/or mission assignments.
 
 ### Clustering notebooks?
+WHAT NEEDS TO BE RUN TO GENERATE THE AR_TOPICS FILE? ALSO THE MERGE_CLEAN_AND_SPLIT_STRATIFIED.IPYNB FILE NOW ADDS THE AR_TOPICS.CSV FILE AS PART OF THE MERGING SO IT CAN'T BE USED FOR THE CLUSTERING MODEL.
 
 ### LLM notebooks?
 NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
 
-### Multilabel classification notebooks
-The exploratory data analysis notebooks (explore_ma.ipynb and explore_dds.ipynb) are just for exploratory purposes and do not create any essential files for the other notebooks to use. These both create visualizations as part of the analysis and explore_ma does save one visualization to a file. Merge_clean_and_split_stratified.ipynb performs the task of merging the MA, DDS, and AR Topic datasets together, then splits those into a training set and test set. This must be run in order to create the training and test parquet files used by the multilabel classification notebooks to create models for later use. Multilabel_classification_model_selection_ESF.ipynb should be run next to create the ESF prediction model, which will save to a pickle file as part of the notebook. This notebook also contains our error analysis for this particular model. Multilabel_classification_model_selection_AR_topics.ipynb is the next notebook to run as it will create and save the AR topic prediction model to a different pickle file. Again, this notebook contains our error analysis for this particular model.
+### Multilabel classification notebooks - model folder
+A requirements.txt file has been added to this folder for use with the notebooks it contains. The exploratory data analysis notebooks (explore_ma.ipynb and explore_dds.ipynb) are just for exploratory purposes and do not create any essential files for the other notebooks to use. These both create visualizations as part of the analysis and explore_ma does save one visualization to a file that is used in our report.
+
+Merge_clean_and_split_stratified.ipynb performs the task of merging the MA, DDS, and AR Topic datasets together, then splits those into a training set and test set. This must be run in order to create the training and test parquet files used by the multilabel classification notebooks to create models for later use. The FEMA datasets are added to this folder via the makefile and a copy of AR_topics.csv has been added to the repo in this folder so that users do not have to move any files between folders.
+
+Multilabel_classification_model_selection_ESF.ipynb should be run next to create the ESF prediction model, which will save to a pickle file as part of the notebook. This notebook can take a while to run as it includes multiple rounds of tuning and model comparisions via cross validation. This notebook also contains our error analysis for this particular model, along with other analysis. Multilabel_classification_model_selection_AR_topics.ipynb is the next notebook to run as it will create and save the AR topic prediction model to a different pickle file. Again, this notebook also takes a while to run and contains our error analysis and other analysis for this particular model.
 
 ### Streamlit app branch
 The files here do not need to be run as part of the project, which is why they exist in a separate branch. They are used by the Streamlit site to provide a user interface to perform our inference and information retrieval functions. The front end is available at https://fema-recommendergit-se8dcweiaepgsg7ashtvna.streamlit.app/
