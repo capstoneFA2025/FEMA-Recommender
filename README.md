@@ -48,7 +48,7 @@ Merge_clean_and_split_stratified.ipynb performs the task of merging the MA, DDS,
 Multilabel_classification_model_selection_ESF.ipynb should be run next to create the ESF prediction model, which will save to a pickle file as part of the notebook. This notebook can take a while to run as it includes multiple rounds of tuning and model comparisions via cross validation. This notebook also contains our error analysis for this particular model, along with other analysis. Multilabel_classification_model_selection_AR_topics.ipynb is the next notebook to run as it will create and save the AR topic prediction model to a different pickle file. Again, this notebook also takes a while to run and contains our error analysis and other analysis for this particular model.
 
 ### Streamlit app branch
-The files here do not need to be run as part of the project, which is why they exist in a separate branch. They are used by the Streamlit site to provide a user interface to perform our inference and information retrieval functions. The front end is available at https://fema-recommendergit-se8dcweiaepgsg7ashtvna.streamlit.app/
+The files here do not need to be run as part of the project, which is why they exist in a separate branch. They are used by the Streamlit site to provide a user interface to perform our inference and information retrieval functions. The first version of the front end is available at https://fema-recommendergit-se8dcweiaepgsg7ashtvna.streamlit.app/ and an updated version, based on mentor feedback, is at https://fema-recommender-jpqwlmmdiypkbq6tbvrnfp.streamlit.app/
 
 
 ## Does your dataset have any usage restrictions? Please check for a license associated with the dataset. 
