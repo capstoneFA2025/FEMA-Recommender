@@ -1,18 +1,26 @@
+streamlit
+scikit-learn
+pandas
+numpy
+xgboost
+nltk
+scikit-multilearn
+
 # FEMA Responder Assist Requirements
 # Core dependencies for mission assignment recommendation system
 
 # Web Framework
-streamlit>=1.28.0
+#streamlit>=1.28.0
 
 # Machine Learning
-scikit-learn>=1.3.0
-xgboost>=2.0.0
-scikit-multilearn>=0.2.0
+#scikit-learn>=1.3.0
+#xgboost>=2.0.0
+#scikit-multilearn>=0.2.0
 
 # Data Processing
-pandas>=2.0.0
-numpy>=1.24.0
+#pandas>=2.0.0
+#numpy>=1.24.0
 
 # Natural Language Processing
-nltk>=3.8.0
+#nltk>=3.8.0
 
