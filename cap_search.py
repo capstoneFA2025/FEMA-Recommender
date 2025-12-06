@@ -1,88 +1,150 @@
-"""This module allows the user to input search terms and find relevant MA assistance requests"""
+"""Document search using inverted index for capability-based matching."""
+
+from pathlib import Path
+from typing import Dict, List, Tuple, Set
+import streamlit as st
+import pandas as pd
 import nltk
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-import streamlit as st
-import pandas as pd
 
-nltk.download('stopwords')
-nltk.download('punkt')
 
-def build_index(doc):
-    with open(doc,'r') as file:
-        lines = file.readlines()
-
-    #convert topics ('documents') to tokens, then store in a dictionary
+@st.cache_resource
+def _download_nltk_data() -> None:
+    """Download required NLTK data files."""
+    try:
+        nltk.data.find('corpora/stopwords')
+    except LookupError:
+        nltk.download('stopwords', quiet=True)
     
-    docs = {}
-    topics = {}
-    #counter = 1
-
-    for line in lines:
-        stop_words = set(stopwords.words("english"))
-        stemmer = PorterStemmer()
-        line.strip()
-        tokens = word_tokenize(line)
-        pos = tokens[0]
-        doc_id = 'd'+pos
+    try:
+        nltk.data.find('tokenizers/punkt_tab')
+    except LookupError:
+        nltk.download('punkt_tab', quiet=True)
     
-        info = tokens[2:]
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt', quiet=True)
+
+
+def _tokenize_and_stem(text: str) -> List[str]:
+    """Tokenize, stem, and remove stopwords from text.
     
-        text = []
-        for word in info:
-            if word not in stop_words:
-                stem_word = stemmer.stem(word)
-                text.append(stem_word)
-        topics[doc_id]=line         
-        docs[doc_id]=text
-
-    term_index={}
-
-    for i in range(len(docs)):
+    Args:
+        text: Input text
         
-        doc_id='d'+str(i)
-        #get terms from documents in order with doc_id
-        terms=docs[doc_id]
-        #check that terms are in inverted index
-        counter=0  #initialize counter for index position of term in terms
-        for term in terms:
-            if term in term_index:
-                #add 1 to counter, append index position
-                if doc_id in term_index[term]: 
-                    term_index[term][doc_id][0]+=1
-                    term_index[term][doc_id][1].append(counter)
-                else:
-                    #create dictionary entry for document, counter at 1 and term position added
-                    doc_term=[1,[counter]]
-                    term_index[term][doc_id]=doc_term
-            else:
-                doc_term=[1,[counter]]
-                term_index[term]={}
-                term_index[term][doc_id]=doc_term
-            counter+=1
+    Returns:
+        List of stemmed tokens
+    """
+    _download_nltk_data()
+    stop_words = set(stopwords.words("english"))
+    stemmer = PorterStemmer()
+    
+    tokens = word_tokenize(text.lower())
+    return [
+        stemmer.stem(word)
+        for word in tokens
+        if word.isalnum() and word not in stop_words
+    ]
+
+
+@st.cache_resource
+def build_index(doc_path: str) -> Tuple[Dict[str, Dict[str, List]], Dict[str, str]]:
+    """Build inverted index from topic document file.
+    
+    Args:
+        doc_path: Path to topics file (format: <id> - <topic text>)
+        
+    Returns:
+        Tuple of (inverted_index, topics_dict)
+    """
+    file_path = Path(doc_path)
+    if not file_path.exists():
+        st.error(f"File not found: {doc_path}")
+        return {}, {}
+    
+    with open(file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    docs: Dict[str, List[str]] = {}
+    topics: Dict[str, str] = {}
+    
+    for line in lines:
+        line = line.strip()
+        if not line or '-' not in line:
+            continue
+            
+        parts = line.split('-', 1)
+        doc_id = f"d{parts[0].strip()}"
+        topic_text = parts[1].strip() if len(parts) > 1 else ""
+        
+        topics[doc_id] = line
+        
+        tokens = _tokenize_and_stem(topic_text)
+        docs[doc_id] = tokens
+    
+    term_index: Dict[str, Dict[str, List]] = {}
+    
+    for doc_id, tokens in docs.items():
+        for position, term in enumerate(tokens):
+            if term not in term_index:
+                term_index[term] = {}
+            
+            if doc_id not in term_index[term]:
+                term_index[term][doc_id] = [0, []]
+            
+            term_index[term][doc_id][0] += 1
+            term_index[term][doc_id][1].append(position)
     
     return term_index, topics
 
-def doc_search(query, index, topics):
-    #takes a query string, index (dict) and topics (dict) as inputs, prints results
-    q_toks = word_tokenize(query)
-    stop_words = set(stopwords.words("english"))
-    stemmer = PorterStemmer()
-    accumulator={}
-    for tok in q_toks:
-        if tok not in stop_words:
-            stem_tok = stemmer.stem(tok)
-            if stem_tok in index:
-                for doc in index[stem_tok]:
-                    if doc not in accumulator:
-                        accumulator[doc]=1
-                    else:
-                        accumulator[doc]+=1
-    sort_accum=sorted(accumulator.items(), key=lambda item: item[1], reverse=True)
-    doc_sort=set([item[0] for item in sort_accum])
-    final_list=[]
-    for d in doc_sort:
-        final_list.append(topics[d])
-    st.write(pd.Series(final_list))
-                    #st.markdown(topics[doc])
+
+def doc_search(
+    query: str,
+    index: Dict[str, Dict[str, List]],
+    topics: Dict[str, str],
+    max_results: int = 10
+) -> None:
+    """Search documents and display results.
+    
+    Args:
+        query: Search query
+        index: Inverted index from build_index
+        topics: Topics dictionary from build_index
+        max_results: Maximum results to display
+    """
+    if not query or not query.strip():
+        st.warning("Please enter a search query.")
+        return
+    
+    query_tokens = _tokenize_and_stem(query)
+    
+    if not query_tokens:
+        st.warning("No valid search terms found.")
+        return
+    
+    accumulator: Dict[str, int] = {}
+    
+    for token in query_tokens:
+        if token in index:
+            for doc_id in index[token]:
+                accumulator[doc_id] = accumulator.get(doc_id, 0) + 1
+    
+    if not accumulator:
+        st.info("No matching documents found.")
+        return
+    
+    sorted_docs = sorted(
+        accumulator.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )[:max_results]
+    
+    results = [topics[doc_id] for doc_id, _ in sorted_docs if doc_id in topics]
+    
+    if results:
+        st.write(pd.DataFrame(results, columns=['Matching Topics']))
+    else:
+        st.info("No matching documents found.")

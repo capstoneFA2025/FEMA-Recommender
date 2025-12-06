@@ -1,31 +1,69 @@
-"""This file takes the input from the user (ESF selection) and creates a dataframe to be passed into a ML model for prediction"""
-import pandas as pd
+"""Load AR and SOW topic files."""
 
-def get_AR_topics(doc):
+from pathlib import Path
+from typing import Dict
 
-    with open(doc,'r') as file:
-        lines = file.readlines()
 
-    AR_topics={}
-    for line in lines:
-        #line=line.strip()
-        split_line=line.strip().split('-')
-        AR_topics[int(split_line[0].strip())]=split_line[1]
-
-    return AR_topics
-
-def get_SOW_topics(doc):
-    with open(doc,'r') as file:
-        lines = file.readlines()
-
-    SOW_topics={}
-    for line in lines:
-        #line=line.strip()
-        split_line=line.strip().split('-')
-        SOW_topics[int(split_line[0].strip())]=split_line[1]
-
-    return SOW_topics
+def get_AR_topics(doc_path: str) -> Dict[int, str]:
+    """Load AR topics from file.
     
-def AR_SoW_connect():
-    connect={}
-    return connect
+    Args:
+        doc_path: Path to AR topics file (format: <id> - <topic text>)
+        
+    Returns:
+        Dictionary mapping topic IDs to topic text
+    """
+    topics = {}
+    file_path = Path(doc_path)
+    
+    if not file_path.exists():
+        return topics
+    
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()
+            if not line or '-' not in line:
+                continue
+            
+            parts = line.split('-', 1)
+            try:
+                topic_id = int(parts[0].strip())
+                topic_text = parts[1].strip() if len(parts) > 1 else ""
+                topics[topic_id] = topic_text
+            except (ValueError, IndexError):
+                continue
+    
+    return topics
+
+
+def get_SOW_topics(doc_path: str) -> Dict[int, str]:
+    """Load SOW topics from file.
+    
+    Args:
+        doc_path: Path to SOW topics file (format: <id> - <topic text>)
+        
+    Returns:
+        Dictionary mapping topic IDs to topic text
+    """
+    topics = {}
+    file_path = Path(doc_path)
+    
+    if not file_path.exists():
+        return topics
+    
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()
+            if not line or '-' not in line:
+                continue
+            
+            parts = line.split('-', 1)
+            try:
+                topic_id = int(parts[0].strip())
+                topic_text = parts[1].strip() if len(parts) > 1 else ""
+                topics[topic_id] = topic_text
+            except (ValueError, IndexError):
+                continue
+    
+    return topics
+
