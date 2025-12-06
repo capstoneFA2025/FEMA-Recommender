@@ -1,5 +1,5 @@
 # FEMA-Recommender
-A MADS capstone project based on a recommendation system
+A MADS capstone project providing an information retrieval and recommender system to users via a cloud-based user interface.
 
 ## README requirements
 Your README is the technical documentation for your repo. Provide an overview of your project, how it's organized, and instructions for using your code. Your repository should be documented with a welcoming, informative README so a data scientist from outside MADS could understand what you did!
