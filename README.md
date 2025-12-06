@@ -25,6 +25,10 @@ PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE
 
 ### Obtaining the data files
 WE PROBABLY NEED TO CREATE A MAKEFILE THAT WILL DOWNLOAD THE MA AND DDS DATASETS FROM GOOGLE DRIVE. JOE'S NOTEBOOKS ARE USING A PARQUET VERSION INSTEAD OF CSV BUT MAYBE THIS SHOULD CHANGE?
+A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the repo, run the following command:
+
+[make download-files]
+
 
 ### Clustering notebooks?
 
