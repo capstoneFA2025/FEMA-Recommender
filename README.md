@@ -24,7 +24,7 @@ PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE
 * MODEL NOTEBOOKS
 
 ### Obtaining the data files
-JOE'S NOTEBOOKS ARE USING A PARQUET VERSION INSTEAD OF CSV BUT MAYBE THIS SHOULD CHANGE?
+IS ANYONE USING CSV FILES INSTEAD OF PARQUET?
 
 A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the main branch of this repo, run the following command:
 
