@@ -20,7 +20,7 @@ Notebooks for this project are split into separate folders, each with its own re
 PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE?
 
 * CLUSTERING
-* LLM
+* NLP
 * EDA
 * MERGE CLEAN SPLIT
 * MODEL NOTEBOOKS
@@ -39,7 +39,7 @@ The files downloaded are stored versions of the datasets rather than the version
 ### Clustering notebooks?
 WHAT NEEDS TO BE RUN TO GENERATE THE AR_TOPICS FILE? ALSO THE MERGE_CLEAN_AND_SPLIT_STRATIFIED.IPYNB FILE NOW ADDS THE AR_TOPICS.CSV FILE AS PART OF THE MERGING SO IT CAN'T BE USED FOR THE CLUSTERING MODEL.
 
-### LLM notebooks?
+### NLP notebooks?
 NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
 
 ### Multilabel classification notebooks - model folder
