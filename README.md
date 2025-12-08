@@ -1,9 +1,6 @@
 # FEMA-Recommender
 A MADS capstone project providing an information retrieval and recommender system to users via a cloud-based user interface.
 
-## README requirements (DELETE PRIOR TO SUBMISSION)
-Your README is the technical documentation for your repo. Provide an overview of your project, how it's organized, and instructions for using your code. Your repository should be documented with a welcoming, informative README so a data scientist from outside MADS could understand what you did!
-
 ## About the project
 Federal Emergency Management Agency (FEMA) Incident Management Assistance Teams (IMAT) are the first FEMA personnel to respond to a Federally declared disaster, and are responsible for building out the Federal response in conjunction with the State, Local, Tribal or Territorial (SLTT) government.  One of the problems encountered in response operations is the volume of work required at the start of a disaster coupled with the lack of staff to perform the work.  Hours can be spent generating ideas of what mission assignments are needed, and the potential scope of the operation - let alone the actual scope as that may take days to learn.  For this project, we envision using existing data from disasters to provide a virtual 'assistant' to emergency managers in this sort of situation.  Instead of spending hours determining what is likely needed and then drafting from scratch (or a template), what if we could use machine learning and other data science tools to do some of that basic work and recommend the most likely mission assignments for that disaster and jurisdiction?  Beneficiaries could not only be FEMA IMATs, but also the SLTT emergency managers who frequently do not have much experience, staff, or knowledge of FEMA programs.
 
@@ -17,13 +14,6 @@ Our project creates a working user interface that allows users multiple options 
 Notebooks for this project are split into separate folders, each with its own requirements.txt file. This was done due to the very specific combination of libraries and associated versions necessary for the Large Language Model (LLM) notebook to function. 
 
 ## How to run the code
-PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE?
-
-* NLP
-* CLUSTERING
-* EDA
-* MERGE CLEAN SPLIT
-* MODEL NOTEBOOKS
 
 ### Obtaining the data files
 A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the main branch of this repo, run the following command:
@@ -34,13 +24,13 @@ make download-files
 
 The files downloaded are stored versions of the datasets rather than the versions currently on FEMA's website. This is because the files are continuously updated by FEMA, meaning that expected results could change based on new disaster declarations and/or mission assignments.
 
-### Clustering notebooks
+### Clustering notebooks - topicClustering folder
 In order to get the topic clusters, the MA_topics, SoW_labels and SoW_topics notebooks must be run.  The MA_topics notebook generates the AR_topics.csv and the AR_topics_cluster_centers.csv.  The SoW_labels notebook generates the filtered_topics.csv used for the SoW_topics notebook.  The SoW_topics notebook produces the sow_topic_cluster_centers.csv.  The topic cluster centers were used to manually generate the txt files employed in the app.  
 
-### NLP notebooks?
+### NLP notebooks - naturalLanguageProcessing folder
 NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
 
-### Multilabel classification notebooks - model folder
+### Multilabel classification notebooks - multilabelClassificatinModels folder
 A requirements.txt file has been added to this folder for use with the notebooks it contains. The exploratory data analysis notebooks (explore_ma.ipynb and explore_dds.ipynb) are just for exploratory purposes and do not create any essential files for the other notebooks to use. These both create visualizations as part of the analysis and explore_ma does save one visualization to a file that is used in our report.
 
 Merge_clean_and_split_stratified.ipynb performs the task of merging the MA, DDS, and AR Topic datasets together, then splits those into a training set and test set. This must be run in order to create the training and test parquet files used by the multilabel classification notebooks to create models for later use. The FEMA datasets are added to this folder via the makefile and a copy of AR_topics.csv has been added to the repo in this folder so that users do not have to move any files between folders.
@@ -57,6 +47,4 @@ Disaster Declaration Summaries: https://www.fema.gov/openfema-data-page/disaster
 Mission Assignments: https://www.fema.gov/openfema-data-page/mission-assignments-v2
 
 Both FEMA datasets are updated weekly.
-
-
 
