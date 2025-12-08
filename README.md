@@ -9,7 +9,7 @@ Federal Emergency Management Agency (FEMA) Incident Management Assistance Teams 
 
 This project works off of two datasets available from FEMA. The first contains information about past disasters through disaster declarations summaries (DDS). It records the disaster number, impacted counties, state, region, and disaster type. In addition to the disaster type for the declaration, it includes additional disasters occurring in the same area. For instance, if a wildfire was followed by heavy rain, then flooding and landslides may be additional disasters in the declaration. All of these types of disasters are important in understanding the mission assignments (MA) requested. The second consists of approved mission assignments from October 2012- late 2024. These are real-world mission assignments that are recorded by type of assistance, Emergency Support Function (ESF), responsible agency, region, state, and disaster number. We are most interested in the assistance requested (AR), as that is the starting point for all mission assignments.
 
-The work for this project included multiple steps to build towards the final interactive product, which serves as a recommended and information retrieval (IR) system. First, topic clusters were created for AR and statement of work (SoW) entries (these define the requirements for the agencies receiving MAs), using an LLM to generalize the language and top2vec to create topics. Next, two multilabel classification models were created for a two stage prediction process. First, appropriate ESFs are predicted given the state, incident types, and declaration type. Second, after the user has selected the ESFs they wish to include, AR topics associated with the incident and ESFs are predicted to give users starter language to fill out MAs.
+The work for this project included multiple steps to build towards the final interactive product, which serves as a recommender and information retrieval (IR) system. First, topic clusters were created for AR and statement of work (SoW) entries (these define the requirements for the agencies receiving MAs), using an LLM to generalize the language and top2vec to create topic clusters. Next, two multilabel classification models were created for a two stage prediction process. First, appropriate ESFs are predicted given the state, incident types, and declaration type. Second, after the user has selected the ESFs they wish to include, AR topics associated with the incident and ESFs are predicted to give users starter language to fill out MAs.
 
 Our project creates a working user interface that allows users multiple options to help them build mission assignments. They may start by obtaining recommended ESFs and AR topics by providing information about the disaster. If the user wishes to start with their own list of ESFs, they can move on to the IR component of the interface. Users search for capabilities that are required by the disaster response, such as ‘debris removal’, and the IR system will search for AR and SoW statements that match the query.
 
@@ -19,14 +19,19 @@ Notebooks for this project are split into separate folders, each with its own re
 ## How to run the code
 PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE?
 
-* CLUSTERING
 * NLP
+* CLUSTERING
 * EDA
 * MERGE CLEAN SPLIT
 * MODEL NOTEBOOKS
 
 ### Obtaining the data files
 IS ANYONE USING CSV FILES INSTEAD OF PARQUET?
+FEMA data can be obtained from the OpenFEMA data portal.  The two datasets can be found at the following links:
+Disaster Declaration Summaries: https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2
+Mission Assignments: https://www.fema.gov/openfema-data-page/mission-assignments-v2
+
+Both FEMA datasets are updated weekly.
 
 A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the main branch of this repo, run the following command:
 
@@ -36,8 +41,8 @@ make download-files
 
 The files downloaded are stored versions of the datasets rather than the versions currently on FEMA's website. This is because the files are continuously updated by FEMA, meaning that expected results could change based on new disaster declarations and/or mission assignments.
 
-### Clustering notebooks?
-WHAT NEEDS TO BE RUN TO GENERATE THE AR_TOPICS FILE? ALSO THE MERGE_CLEAN_AND_SPLIT_STRATIFIED.IPYNB FILE NOW ADDS THE AR_TOPICS.CSV FILE AS PART OF THE MERGING SO IT CAN'T BE USED FOR THE CLUSTERING MODEL.
+### Clustering notebooks
+In order to get the topic clusters, the MA_topics, SoW_labels and SoW_topics notebooks must be run.  The MA_topics notebook generates the AR_topics.csv and the AR_topics_cluster_centers.csv.  The SoW_labels notebook generates the filtered_topics.csv used for the SoW_topics notebook.  The SoW_topics notebook produces the sow_topic_cluster_centers.csv.  The topic cluster centers were used to manually generate the txt files employed in the app.  
 
 ### NLP notebooks?
 NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
