@@ -26,7 +26,8 @@ The files downloaded are stored versions of the datasets rather than the version
 
 
 ### NLP notebooks - naturalLanguageProcessing folder
-NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
+Each notebook in the natural language processing folder has its own env file associated with it that is listed in the notebook. The LLM_topic_modeling notebook requires an aws api key to run fully and will take 7-8 hours to run it. It will clean the SoW text some before extracting action statements. The output from the LLM_topic_modeling notebook is the input csv for the topic explorations notebook that has some code to analyze the topics/actions extracted by the LLM.
+
 
 ### Clustering notebooks - topicClustering folder
 In order to get the topic clusters, the MA_topics, SoW_labels and SoW_topics notebooks must be run.  The MA_topics notebook generates the AR_topics.csv and the AR_topics_cluster_centers.csv.  The SoW_labels notebook generates the filtered_topics.csv used for the SoW_topics notebook.  The SoW_topics notebook produces the sow_topic_cluster_centers.csv.  The topic cluster centers were used to manually generate the txt files employed in the app.  
