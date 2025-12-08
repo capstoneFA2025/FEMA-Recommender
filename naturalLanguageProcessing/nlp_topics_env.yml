@@ -1,0 +1,15 @@
+name: nlp_topics_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - pandas>=2.0.0
+      - numpy<2
+      - pyarrow>=10.0.1
+      - boto3
+      - tiktoken
+      - tqdm
+      - ipykernel
