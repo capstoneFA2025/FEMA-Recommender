@@ -24,11 +24,12 @@ make download-files
 
 The files downloaded are stored versions of the datasets rather than the versions currently on FEMA's website. This is because the files are continuously updated by FEMA, meaning that expected results could change based on new disaster declarations and/or mission assignments.
 
-### Clustering notebooks - topicClustering folder
-In order to get the topic clusters, the MA_topics, SoW_labels and SoW_topics notebooks must be run.  The MA_topics notebook generates the AR_topics.csv and the AR_topics_cluster_centers.csv.  The SoW_labels notebook generates the filtered_topics.csv used for the SoW_topics notebook.  The SoW_topics notebook produces the sow_topic_cluster_centers.csv.  The topic cluster centers were used to manually generate the txt files employed in the app.  
 
 ### NLP notebooks - naturalLanguageProcessing folder
 NOTE THAT JACOB'S LLM NOTEBOOK WILL REQUIRE AN AWS API KEY AND TAKE 7 HOURS OF COMPUTE TIME.
+
+### Clustering notebooks - topicClustering folder
+In order to get the topic clusters, the MA_topics, SoW_labels and SoW_topics notebooks must be run.  The MA_topics notebook generates the AR_topics.csv and the AR_topics_cluster_centers.csv.  The SoW_labels notebook generates the filtered_topics.csv used for the SoW_topics notebook.  The SoW_topics notebook produces the sow_topic_cluster_centers.csv.  The topic cluster centers were used to manually generate the txt files employed in the app.  
 
 ### Multilabel classification notebooks - multilabelClassificatinModels folder
 A requirements.txt file has been added to this folder for use with the notebooks it contains. The exploratory data analysis notebooks (explore_ma.ipynb and explore_dds.ipynb) are just for exploratory purposes and do not create any essential files for the other notebooks to use. These both create visualizations as part of the analysis and explore_ma does save one visualization to a file that is used in our report.
