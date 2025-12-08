@@ -767,6 +767,14 @@ def main() -> None:
         "AI-powered mission assignment recommendations for emergency response coordination."
     )
     
+    st.markdown(
+        """
+        **Disclaimer:**  
+        This product uses the Federal Emergency Management Agency’s OpenFEMA API, but is not endorsed by FEMA.  
+        The Federal Government or FEMA cannot vouch for the data or analyses derived from these data after retrieval.
+        """
+)
+
     esf_model, ar_topic_model = load_models()
     
     st.divider()
