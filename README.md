@@ -26,13 +26,6 @@ PLACE INFO HERE - WHAT'S THE ORDER THAT THESE NEED TO RUN IN ORDER TO MAKE SENSE
 * MODEL NOTEBOOKS
 
 ### Obtaining the data files
-IS ANYONE USING CSV FILES INSTEAD OF PARQUET?
-FEMA data can be obtained from the OpenFEMA data portal.  The two datasets can be found at the following links:
-Disaster Declaration Summaries: https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2
-Mission Assignments: https://www.fema.gov/openfema-data-page/mission-assignments-v2
-
-Both FEMA datasets are updated weekly.
-
 A makefile is provided that will download the necessary datasets and save them to the correct folders. After cloning the main branch of this repo, run the following command:
 
 ```
@@ -59,6 +52,11 @@ The files here do not need to be run as part of the project, which is why they e
 
 
 ## Does your dataset have any usage restrictions? Please check for a license associated with the dataset. 
-No usage restrictions.  This is Federal data that is publicly available.
+No usage restrictions.  This is Federal data that is publicly available. FEMA data can be obtained from the OpenFEMA data portal.  The two datasets can be found at the following links:
+Disaster Declaration Summaries: https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2
+Mission Assignments: https://www.fema.gov/openfema-data-page/mission-assignments-v2
+
+Both FEMA datasets are updated weekly.
+
 
 
